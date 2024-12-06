@@ -26,3 +26,4 @@ vscode:
 ports:
   - port: 8080  # Example port if you run a local server
     onOpen: open-preview
+has context menu
