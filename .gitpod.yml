@@ -1,7 +1,28 @@
 tasks:
   - init: |
+      # Update package list
       sudo apt-get update
+ 
+      # Install required tools
       sudo apt-get install -y wget xvfb openjdk-11-jdk maven
-      mvn dependency:resolve
+ 
+      # Install Google Chrome
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get -fy install
+ 
+      # Install ChromeDriver
+wget https://chromedriver.storage.googleapis.com/$(wget -qO- https://chromedriver.storage.googleapis.com/LATEST_RELEASE)/chromedriver_linux64.zip
+unzip chromedriver_linux64.zip
+      sudo mv chromedriver /usr/bin/
+ 
   - command: |
-      echo "Gitpod is ready. You can now create and run your Selenium scripts."
+      echo "Gitpod environment is ready. Start coding your Selenium scripts!"
+ 
+vscode:
+  extensions:
+    - vscjava.vscode-java-pack  # Java language support
+    - redhat.vscode-xml         # XML support for Maven and pom.xml
+ 
+ports:
+  - port: 8080  # Example port if you run a local server
+    onOpen: open-preview
