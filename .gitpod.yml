@@ -1,5 +1,7 @@
 tasks:
   - init: |
       sudo apt-get update
-      sudo apt-get install -y wget xvfb python3-pip
-      pip3 install selenium
+      sudo apt-get install -y wget xvfb openjdk-11-jdk maven
+      mvn dependency:resolve
+  - command: |
+      echo "Gitpod is ready. You can now create and run your Selenium scripts."
