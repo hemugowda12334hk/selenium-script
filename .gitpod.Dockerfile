@@ -1,11 +1,10 @@
-FROM gitpod/workspace-full
- 
-# Install Chrome
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
-    && sudo dpkg -i google-chrome-stable_current_amd64.deb \
-    && sudo apt-get -fy install
- 
-# Install ChromeDriver
-RUN wget https://chromedriver.storage.googleapis.com/$(wget -qO- https://chromedriver.storage.googleapis.com/LATEST_RELEASE)/chromedriver_linux64.zip \
-&& unzip chromedriver_linux64.zip \
-    && sudo mv chromedriver /usr/bin/
+FROM gitpod/workspace-full:latest
+
+USER gitpod
+
+# Install Java and Maven
+RUN sudo apt update && sudo apt install -y openjdk-17-jdk maven
+
+# Set Java environment variables
+ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+ENV PATH="$JAVA_HOME/bin:$PATH"
